@@ -10,7 +10,6 @@ import { Icon } from "@iconify/react";
 type ProjectProps = {
   title: string;
   description: string;
-  tags: readonly string[];
   icons: readonly string[];
   imageUrl: StaticImageData;
   githubLink?: string;
@@ -21,7 +20,6 @@ type ProjectProps = {
 export default function Project({
   title,
   description,
-  tags,
   icons,
   imageUrl,
   githubLink,

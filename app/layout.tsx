@@ -1,17 +1,26 @@
 import Header from "@/components/header";
-import { Nunito } from "next/font/google";
 import ActiveSectionContextProvider from "@/context/active-section-context";
 import ThemeSwitch from "@/components/theme-switch";
 import ThemeContextProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
+import localFont from "@next/font/local";
 import "./globals.css";
 
-const nunito = Nunito({ subsets: ["latin"] });
-
 export const metadata = {
-  title: "Ben Rogers | Software Engineer",
-  description: "Software engineer at Humanforce.",
+  title: "Ervin Behxheti | Software Developer",
+  description: "Ervin Behxheti's personal portfolio showcasing projects, skills, and experience in web development.",
 };
+
+const sfRegular = localFont({
+  src: [
+    {
+      path: "../public/fonts/sf-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-sfRegular",
+});
 
 export default function RootLayout({
   children,
@@ -21,13 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <body
-        className={`${nunito.className} bg-gray-50 text-gray-950 relative dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
+        className={`${sfRegular.variable} font-custom bg-gray-50 text-gray-950 relative dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
       >
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
             <Header />
             {children}
-
             <Toaster position="top-right" />
             <ThemeSwitch />
           </ActiveSectionContextProvider>

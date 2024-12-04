@@ -1,14 +1,9 @@
 import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
-import cryptoCrowdImg from "@/public/cryptocrowd2.png";
-import ozdevsImg from "@/public/ozdevs-two.png";
-import assetTradingImg from "@/public/asset-trading.jpg";
-import euphorusImg from "@/public/euphorus-two.png";
-import euphorusBackendImg from "@/public/euphorus-backend.png";
-import techprowlImg from "@/public/techprowl-two.png";
-import taskManagerImg from "@/public/task-manager.png";
-import familyTreeImg from "@/public/bfsproject.jpg";
-import binaryGameImg from "@/public//binary-game.png";
+import neuralBlogging from "@/public/neural-blogging.webp";
+import eCommerce from "@/public/ecommerce.webp";
+import priceseer from "@/public/scraping.webp";
+import socialMedia from "@/public/socialmedia.webp";
 
 export const links = [
   {
@@ -28,10 +23,6 @@ export const links = [
     hash: "#experience",
   },
   {
-    name: "Education",
-    hash: "#education",
-  },
-  {
     name: "Contact",
     hash: "#contact",
   },
@@ -39,137 +30,67 @@ export const links = [
 
 export const experiencesData = [
   {
-    title: "Web Developer",
-    location: "M3 Digital - Contract",
+    title: "Front End Developer",
+    location: "Attributy",
     description:
-      "Front-end development for a variety of Shopify stores such as FitazFK, Rider Collective, Masseuse Massage, Francesca Jewellery and Salty Captain. Developed high quality landing pages and front end features using HTML, CSS, SCSS, JavaScript and Liquid.",
+      "Designed an interactive data visualization dashboard that provided real-time insights, enhancing client satisfaction and decision-making. Improved website performance and user experience by increasing page load speed by 30% with Server-side Rendering (SSR), boosting SEO and web traffic. Optimized algorithms to enhance efficiency by 12%, reduced bounce rates by 25%, and developed a more responsive interface to drive user engagement. ",
     icon: React.createElement(CgWorkAlt),
-    date: "September 2021 - February 2022",
+    date: "September 2022 - June 2024",
   },
   {
-    title: "Junior Developer",
-    location: "YouPay",
+    title: "Full Stack Developer",
+    location: "Freelancer",
     description:
-      "Developed new features using Laravel, Vue.js, PHP, JavaScript, Tailwind CSS, MySQL and REST APIs. Created an email notification system for mechants to receive weekly/monthly summaries of YouPay carts created, paid and cancelled. I also integrated YouPay into dozens of stores.",
+      "Developed a custom web scrapers for data analysis and reporting, and designed an employee scheduling system to automate shift assignments and improve workforce management. Advised on coding best practices and design patterns, enhancing software quality and ensuring alignment with project objectives.",
     icon: React.createElement(CgWorkAlt),
-    date: "February 2022 - November 2022",
-  },
-  {
-    title: "Software Engineer",
-    location: "The University of Queensland",
-    description:
-      "Full-stack software engineer in the Application Development and Support team. Worked on web applications such as CAHP (Casual Academic Hire and Payment), UQ Maps, UQ Donations, and Programs and Courses.",
-    icon: React.createElement(CgWorkAlt),
-    date: "November 2022 - January 2024",
-  },
-  {
-    title: "Software Engineer",
-    location: "Humanforce",
-    description:
-      "Software engineer in the intelliHR platform team. We are a feature enablement team dedicated to developing features for developers, ensuring they are easier to create. We also look after issues of scale and technical debt for developers and the platform.",
-    icon: React.createElement(CgWorkAlt),
-    date: "January 2024 - Present",
+    date: "Jul 2022 - Present",
   },
 ] as const;
 
 export const projectsData = [
   {
-    title: "CryptoCrowd",
+    title: "Neural Blogging",
     description:
-      "Cryptocurrency sentiment analysis website based on Twitter posts. Users can see the overall sentiment (positive, negative or neutral) of different Cryptocurrencies based on what people are currently posting on Twitter. Users can also see keywords and an average sentiment score. Stateless application that uses Elasticache and S3 on AWS. It also used EC2 and auto-scaling to manage demand.",
-    tags: ["JavaScript", "React", "Express.js", "AWS"],
-    icons: [
-      "logos:aws",
-      "logos:javascript",
-      "logos:react",
-      "logos:bootstrap",
-      "logos:express",
-    ],
-    imageUrl: cryptoCrowdImg,
-    githubLink: "https://github.com/ben04rogers/cab432-assignment-2",
-    demoLink: "https://www.youtube.com/watch?v=uhyC0M4WIl4",
+      "This project is a Progressive Web App (PWA) designed to provide a seamless native app experience on mobile devices. It leverages ChatGPT and web APIs to assist users in creating blog posts. When a new blog post is published, all registered devices with notifications enabled will receive a notification, ensuring users stay updated with the latest content. The app combines the accessibility of a website with the functionality and engagement of a native application. For the moment I have disabled the notification feature",
+    icons: ["logos:typescript-icon", "logos:nextjs-icon", "logos:react", "logos:framer", "logos:tailwindcss-icon", "logos:supabase-icon"],
+    imageUrl: neuralBlogging,
+    githubLink: "https://github.com/ErvinBehxheti/NeuralBlogging",
+    urlLink: "https://neural-blogging.vercel.app/",
   },
   {
-    title: "OzDevs",
+    title: "DigitalLove - eCommerce Store",
     description:
-      "Reverse Job board for companies looking to hire developers in Australia. Filter by experience, location and keyboards.  Companies can pay a monthly fee to be able to message developers on the site and view their information.",
-    tags: ["PHP", "Laravel", "JavaScript", "Tailwind", "MySQL"],
+      "This project is a streamlined eCommerce platform built with Next.js, Sanity, and Stripe. It features a user-friendly interface where customers can browse products, view detailed descriptions, and make secure purchases. Sanity handles content management, allowing for easy updates to product listings and site content. Stripe for ensuring secure transactions. The platform provides a smooth shopping experience with fast loading times and responsive design, optimized for both desktop and mobile devices",
+    icons: ["logos:typescript-icon", "logos:nextjs-icon", "logos:react", "devicon:tailwindcss", "devicon:sanity"],
+    imageUrl: eCommerce,
+    urlLink: "https://next-typescript-ecommerce-sanity-stripe-wggq.vercel.app/",
+    githubLink:
+      "https://github.com/ErvinBehxheti/next_typescript_ecommerce_sanity_stripe",
+  },
+  {
+    title: "PriceSeer",
+    description:
+      "Using Next.js Server Actions, I created a web scraper that collects product information from the Amazon website and adds it to PriceSeer, a price-tracking platform. The scraper efficiently retrieves data such as product prices, descriptions, and availability. To enhance user experience, I also implemented cron jobs that run at scheduled intervals, automatically notifying subscribers whenever there are changes to the product's price or other key details (SCRAPING NOT WORKING MOMENTARILY)",
     icons: [
-      "logos:laravel",
-      "logos:php",
       "logos:javascript",
+      "logos:typescript-icon",
+      "logos:nextjs-icon",
+      "devicon:mongodb",
       "devicon:tailwindcss",
-      "logos:mysql",
     ],
-    imageUrl: ozdevsImg,
-    urlLink: "https://clownfish-app-48u2r.ondigitalocean.app/",
-    githubLink: "https://github.com/ben04rogers/ozdevs-v2",
+    imageUrl: priceseer,
+    githubLink: "https://github.com/ErvinBehxheti/priceseer",
+    urlLink: "https://priceseer.vercel.app/",
   },
   {
-    title: "Company Asset Trading",
+    title: "Social Media App",
     description:
-      "Client-server system written in Java for trading of virtual assets within departments of a company. Facilitated trades via a marketplace model where users can buy and sell assets. Admins of an organisation can create assets, users and modify details. Uses MariaDB as a database and Swing for the GUI.",
-    tags: ["Java", "MariaDB", "Swing"],
-    icons: ["logos:java", "logos:mariadb-icon"],
-    imageUrl: assetTradingImg,
-    githubLink: "https://github.com/ben04rogers/organisation-asset-trading",
-  },
-  // {
-  //   title: "Euphorus",
-  //   description:
-  //     "React application for viewing country happiness data collected from the World Happiness Report initiative. Users can filter by year, country and search limit. AG Grid and Chart.js were used to present the data.",
-  //   tags: ["JavaScript", "React", "Bootstrap"],
-  //   icons: ["logos:javascript", "logos:react", "logos:bootstrap"],
-  //   imageUrl: euphorusImg,
-  //   githubLink: "https://github.com/ben04rogers/cab230assignment1",
-  // },
-  // {
-  //   title: "Country Happiness API",
-  //   description:
-  //     "Developed and deployed an Express API to support the front-end of the Euphorus Happiness Data web application. Routes support query parameters and authorization using JWT. Includes endpoints for countries, rankings, factors, registration, login, and profile. Tested software extensively with Jest and created Swagger documentation for the API as well.      ",
-  //   tags: ["JavaScript", "Node.js", "Express.js", "Swagger", "MySQL"],
-  //   icons: ["logos:javascript", "logos:express", "logos:swagger", "cib:mysql"],
-  //   imageUrl: euphorusBackendImg,
-  //   githubLink: "https://github.com/ben04rogers/cab230assignment2",
-  // },
-  {
-    title: "Techprowl Computer Auction",
-    description:
-      "Computer auction application built with Flask. The site allows users to register, bid on items, leave reviews, post new listings, manage listings, search by keyword, and keep a watch list. ",
-    tags: ["Python", "Flask", "Bootstrap", "SQLite"],
-    icons: ["logos:python", "logos:bootstrap", "logos:sqlite"],
-    imageUrl: techprowlImg,
-    githubLink: "https://github.com/ben04rogers/computer-auction",
-    urlLink: "https://techprowl.herokuapp.com",
-  },
-  {
-    title: "Task Manager Console App",
-    description:
-      "Console app that manages tasks in a project. Users can load projects from a file and generate a seqeuence to complete them in, based on each task's dependencies. Users can also find earliest possible commencement time of each task, add new tasks, update tasks, remove tasks, and save the results to a text file.",
-    tags: ["C#"],
-    icons: ["devicon:csharp"],
-    imageUrl: taskManagerImg,
-    githubLink: "https://github.com/ben04rogers/task-manager",
-  },
-  {
-    title: "Family Tree Shortest Path",
-    description:
-      "Python program that implements a breadth-first search algorithm to generate a minimal spanning tree. Problem was to calculate a shortest path from a starting vertex in a graph to each other vertex. The vertices represent people and each person is related to every other person through parent-child relationships. A person can see how they are related to each other person in the tree",
-    tags: ["Python"],
-    icons: ["logos:python"],
-    imageUrl: familyTreeImg,
-    githubLink: "https://github.com/ben04rogers/breadth-first-search",
-    demoLink: "https://www.youtube.com/watch?v=VXCZKsqupxA",
-  },
-  {
-    title: "Arduino Binary Game",
-    description:
-      "Binary game written in C that runs on an Arduino Uno using Tinkercad. The game aims to help users learn binary by challenging them to input different integers in their binary form within a time limit.",
-    tags: ["C"],
-    icons: ["devicon:c"],
-    imageUrl: binaryGameImg,
-    githubLink: "https://github.com/ben04rogers/binary-game-microcontroller",
-    demoLink: "https://www.youtube.com/watch?v=A6n6XDk4Unw&feature=youtu.be",
+      "The website is a TikTok clone built using modern web development technologies. Developed with Next.js, the site ensures fast server-side rendering and optimized performance. Tailwind CSS is used to create a responsive and mobile-friendly user interface, that works effortlessly across devices.Sanity.io for the backend, allowing for content management and dynamic video uploads. The integration of Google authentication simplifies the login process, offering users a secure way to sign in or create accounts. Search filters are implemented to help users discover content easily.The file structure of the application is well-organized, promoting scalability and maintainability.",
+      icons: ["logos:typescript-icon", "logos:nextjs-icon", "logos:react", "devicon:tailwindcss", "devicon:sanity"],
+    imageUrl: socialMedia,
+    githubLink:
+      "https://github.com/ErvinBehxheti/next_typescript_googleauth_socialmedia",
+    urlLink: "https://tiktik-03.vercel.app/",
   },
 ] as const;
 
@@ -187,28 +108,20 @@ export const skillsData = [
     icon: "logos:react",
   },
   {
+    name: "NextJS",
+    icon: "logos:nextjs-icon",
+  },
+  {
     name: "Node.js",
     icon: "logos:nodejs-icon",
   },
   {
+    name: "Redux",
+    icon: "logos:redux",
+  },
+  {
     name: "PHP",
     icon: "logos:php",
-  },
-  {
-    name: "Laravel",
-    icon: "logos:laravel",
-  },
-  {
-    name: "Symfony",
-    icon: "logos:symfony",
-  },
-  {
-    name: "Python",
-    icon: "logos:python",
-  },
-  {
-    name: "Java",
-    icon: "logos:java",
   },
   {
     name: "HTML",
@@ -217,6 +130,10 @@ export const skillsData = [
   {
     name: "CSS",
     icon: "vscode-icons:file-type-css",
+  },
+  {
+    name: "Tailwind",
+    icon: "logos:tailwindcss-icon",
   },
   {
     name: "SCSS",
@@ -231,23 +148,7 @@ export const skillsData = [
     icon: "logos:mysql",
   },
   {
-    name: "Linux",
-    icon: "flat-color-icons:linux",
-  },
-  {
-    name: "AWS",
-    icon: "logos:aws",
-  },
-  {
-    name: "Docker",
-    icon: "logos:docker-icon",
-  },
-  {
-    name: "Jenkins",
-    icon: "devicon:jenkins",
-  },
-  {
-    name: "Shopify",
-    icon: "logos:shopify",
+    name: "MongoDB",
+    icon: "logos:mongodb-icon",
   },
 ] as const;
