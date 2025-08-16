@@ -35,7 +35,7 @@ export const experiencesData = [
     description:
       "Designed an interactive data visualization dashboard that provided real-time insights, enhancing client satisfaction and decision-making. Improved website performance and user experience by increasing page load speed by 30% with Server-side Rendering (SSR), boosting SEO and web traffic. Optimized algorithms to enhance efficiency by 12%, reduced bounce rates by 25%, and developed a more responsive interface to drive user engagement. ",
     icon: React.createElement(CgWorkAlt),
-    date: "September 2022 - June 2024",
+    date: "October 2022 - November 2023",
   },
   {
     title: "Full Stack Developer",
