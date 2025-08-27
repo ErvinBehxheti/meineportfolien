@@ -43,7 +43,15 @@ export const experiencesData = [
     description:
       "Developed a custom web scrapers for data analysis and reporting, and designed an employee scheduling system to automate shift assignments and improve workforce management. Advised on coding best practices and design patterns, enhancing software quality and ensuring alignment with project objectives.",
     icon: React.createElement(CgWorkAlt),
-    date: "Jul 2022 - Present",
+    date: "Jul 2024 - Aug 2025",
+  },
+  {
+    title: "Web Development Instructor",
+    location: "London School & Logiscool",
+    description:
+      "Taught HTML & CSS fundamentals, including modern layouts (Flexbox, CSS Grid) and web animations (keyframes, transitions) to help students build interactive, responsive pages. Instructed JavaScript basics through CRUD operations and REST API integration—guiding students to fetch, display, and manipulate real data in browser-based projects.",
+    icon: React.createElement(CgWorkAlt),
+    date: "Dec 2024 - Aug 2025",
   },
 ] as const;
 
