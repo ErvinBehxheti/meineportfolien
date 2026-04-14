@@ -1,6 +1,7 @@
-import React from "react";
-import { FaPaperPlane } from "react-icons/fa";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+"use client";
+
+import { Send } from "lucide-react";
+import { useFormStatus } from "react-dom";
 
 export default function SubmitBtn() {
   const { pending } = useFormStatus();
@@ -8,15 +9,18 @@ export default function SubmitBtn() {
   return (
     <button
       type="submit"
-      className="group flex items-center justify-center gap-2 h-[3rem] w-[8rem] bg-gray-900 text-white rounded-full outline-none transition-all focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 dark:bg-white dark:bg-opacity-10 disabled:scale-100 disabled:bg-opacity-65"
       disabled={pending}
+      className="group inline-flex items-center justify-center gap-2 h-11 px-6 rounded-full bg-[var(--accent)] text-white text-sm font-medium transition-all hover:bg-[var(--accent-hover)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] disabled:opacity-60 disabled:cursor-not-allowed"
     >
       {pending ? (
-        <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+        <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
       ) : (
         <>
-          Submit{" "}
-          <FaPaperPlane className="text-xs opacity-70 transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />{" "}
+          Send message
+          <Send
+            size={14}
+            className="opacity-80 transition-transform group-hover:translate-x-0.5"
+          />
         </>
       )}
     </button>

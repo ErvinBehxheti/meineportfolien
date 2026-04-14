@@ -1,109 +1,197 @@
 "use client";
 
-import { useRef } from "react";
-import Image, { StaticImageData } from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { BiLinkExternal } from "react-icons/bi";
-import { AiFillGithub, AiFillYoutube } from "react-icons/ai";
-import { Icon } from "@iconify/react";
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ExternalLink, Github, Lock, ArrowUpRight } from "lucide-react";
+import type { ProjectData } from "@/lib/types";
 
-type ProjectProps = {
-  title: string;
-  description: string;
-  icons: readonly string[];
-  imageUrl: StaticImageData;
-  githubLink?: string;
-  demoLink?: string;
-  urlLink?: string;
-};
+type ProjectProps = ProjectData & { index: number; featured?: boolean };
+
+// Dot-grid SVG for private project placeholder
+const DotGrid = () => (
+  <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1" fill="currentColor" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#dots)" />
+  </svg>
+);
 
 export default function Project({
   title,
-  description,
-  icons,
+  summary,
+  focus,
+  stack,
+  result,
   imageUrl,
   githubLink,
-  demoLink,
   urlLink,
+  isPrivate,
+  index,
+  featured = false,
 }: ProjectProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["0 1", "1.33 1"],
-  });
-  const scaleProgess = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgess = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
-
   return (
-    <motion.div
-      ref={ref}
+    <motion.article
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ type: "spring", stiffness: 140, damping: 22, delay: index * 0.08 }}
+      whileHover={{ y: -3 }}
+      className="surface-card flex flex-col overflow-hidden group relative"
       style={{
-        scale: scaleProgess,
-        opacity: opacityProgess,
+        transition: "box-shadow 0.25s ease, transform 0.25s ease",
       }}
-      className="group mb-3 sm:mb-8 last:mb-0"
     >
-      <section className="bg-gray-100 max-w-[58rem] border border-black/5 rounded-lg overflow-hidden sm:pr-8 relative lg:min-h-[21rem] hover:bg-gray-200 transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
-        <div className="pt-4 pb-7 px-5 md:pl-10 md:pr-2 md:pt-10 lg:max-w-[50%] flex flex-col h-full">
-          <h3 className="text-2xl font-semibold mb-4">{title}</h3>
-          <ul className="flex flex-wrap gap-2 mb-3 sm:mt-auto">
-            <p className="font-bold text-gray-500 dark:text-white/70">
-              Made with:{" "}
-            </p>
-            {icons.map((icon, iconIndex) => (
-              <Icon key={iconIndex} icon={icon} className="mr-3 text-2xl" />
-            ))}
-          </ul>
-          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 mb-3">
-            {description}
+      {/* Accent top-bar — each card has a slightly different shade */}
+      <div
+        className="h-[3px] w-full"
+        style={{
+          background: index % 2 === 0
+            ? "linear-gradient(90deg, var(--accent), rgba(15,131,253,0.3))"
+            : "linear-gradient(90deg, rgba(45,200,180,0.9), var(--accent))",
+        }}
+      />
+
+      {/* Image / placeholder area */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: featured ? "16/7" : "16/9" }}>
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 768px) 100vw, 55vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div
+            className="w-full h-full flex flex-col items-center justify-center relative"
+            style={{ background: "var(--surface-2)", color: "var(--text-tertiary)" }}
+          >
+            <DotGrid />
+            <div className="relative z-10 flex flex-col items-center gap-3">
+              {/* Abstract architecture diagram */}
+              <div className="flex items-center gap-2 opacity-60">
+                <div
+                  className="w-10 h-7 rounded-md border flex items-center justify-center text-[9px] font-bold"
+                  style={{ borderColor: "var(--border-strong)", background: "var(--accent-dim)" }}
+                >
+                  UI
+                </div>
+                <div className="w-5 h-px" style={{ background: "var(--border-strong)" }} />
+                <div
+                  className="w-10 h-7 rounded-md border flex items-center justify-center text-[9px] font-bold"
+                  style={{ borderColor: "var(--accent)", background: "var(--accent-subtle)" }}
+                >
+                  API
+                </div>
+                <div className="w-5 h-px" style={{ background: "var(--border-strong)" }} />
+                <div
+                  className="w-10 h-7 rounded-md border flex items-center justify-center text-[9px] font-bold"
+                  style={{ borderColor: "var(--border-strong)", background: "var(--accent-dim)" }}
+                >
+                  DB
+                </div>
+              </div>
+              <span className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "var(--text-tertiary)" }}>
+                <Lock size={11} />
+                Private client work
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Card body */}
+      <div className="flex flex-col gap-3 p-5 sm:p-6 flex-1">
+        {/* Role eyebrow */}
+        <p className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "var(--accent)" }}>
+          {isPrivate ? "Client Work" : "Personal Project"}
+        </p>
+
+        {/* Title + arrow */}
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="font-semibold text-base leading-tight" style={{ color: "var(--text-primary)" }}>
+            {title}
+          </h3>
+          {(urlLink || githubLink) && (
+            <ArrowUpRight
+              size={16}
+              className="shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+              style={{ color: "var(--accent)" }}
+            />
+          )}
+        </div>
+
+        {/* Summary */}
+        <p className="text-sm leading-relaxed -mt-1" style={{ color: "var(--text-secondary)" }}>
+          {summary}
+        </p>
+
+        {/* Focus — left-border callout */}
+        <p
+          className="text-xs leading-relaxed pl-3 border-l-2"
+          style={{ color: "var(--text-tertiary)", borderColor: "var(--border-accent)" }}
+        >
+          {focus}
+        </p>
+
+        {/* Stack pills */}
+        <div className="flex flex-wrap gap-1.5">
+          {stack.map((tech) => (
+            <span key={tech} className="skill-pill">{tech}</span>
+          ))}
+        </div>
+
+        {/* Result */}
+        <div
+          className="mt-auto pt-4 border-t"
+          style={{ borderColor: "var(--border)" }}
+        >
+          <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+            <span className="font-semibold" style={{ color: "var(--text-primary)" }}>Result: </span>
+            {result}
           </p>
-          <div className="flex">
+        </div>
+
+        {/* Links */}
+        {(urlLink || githubLink) && (
+          <div className="flex gap-2">
             {urlLink && (
               <a
                 href={urlLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center bg-[#111827] text-white py-2 px-4 mr-2 rounded-full hover:scale-105"
+                className="inline-flex items-center gap-1.5 text-xs font-medium rounded-full px-3 py-1.5 border transition-colors"
+                style={{
+                  color: "var(--text-secondary)",
+                  borderColor: "var(--border)",
+                  background: "var(--surface-2)",
+                }}
               >
-                <BiLinkExternal className="mr-1" /> Live
+                <ExternalLink size={11} /> Live site
               </a>
             )}
-
-            {demoLink && (
-              <a
-                href={demoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center bg-[#111827] text-white py-2 px-4 mr-2 rounded-full hover:scale-105"
-              >
-                <AiFillYoutube className="mr-1" /> Demo
-              </a>
-            )}
-
             {githubLink && (
               <a
                 href={githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center border border-[#111827] py-2 px-4 rounded-full mr-2 text-[#111827] hover:scale-105 dark:border-white dark:text-white dark:border-opacity-40"
+                className="inline-flex items-center gap-1.5 text-xs font-medium rounded-full px-3 py-1.5 border transition-colors"
+                style={{
+                  color: "var(--text-secondary)",
+                  borderColor: "var(--border)",
+                  background: "var(--surface-2)",
+                }}
               >
-                <AiFillGithub className="mr-1 opacity-70" />{" "}
-                <span className="opacity-70">GitHub</span>
+                <Github size={11} /> Code
               </a>
             )}
           </div>
-        </div>
-
-        <Image
-          src={imageUrl}
-          alt="Project I worked on"
-          quality={95}
-          className="absolute hidden lg:block top-[60px] -right-10 w-[28.25rem] rounded-t-lg shadow-2xl scale-[1.0]
-          transition
-          lg:scale-[1.1]
-          "
-        />
-      </section>
-    </motion.div>
+        )}
+      </div>
+    </motion.article>
   );
 }

@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
-import { BsLinkedin } from "react-icons/bs";
-import { FaGithub } from "react-icons/fa";
 import { useSectionInView } from "@/lib/hooks";
-import profilephoto from "@/public/id-photo.jpg";
+import { MapPin } from "lucide-react";
+import HeroVisual from "./hero-visual";
+
+const heroStack = ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind"];
 
 export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
@@ -15,85 +15,109 @@ export default function Intro() {
     <section
       ref={ref}
       id="home"
-      className="mb-16 sm:mb-0 text-center scroll-mt-[100rem] min-h-screen grid justify-center pt-28 pb-14 sm:pt-36 sm:pb-18 w-full px-4"
+      className="w-full min-h-[100dvh] flex flex-col justify-center scroll-mt-[100rem] relative overflow-hidden"
     >
-      <div className="flex items-center justify-center">
-        <div className="relative">
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: "tween",
-              duration: 0.2,
-            }}
-          >
-            <Image
-              src={profilephoto}
-              alt="Ervins Profile Photo"
-              width="128"
-              height="128"
-              quality="95"
-              priority={true}
-              className="h-32 w-32 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
-            />
-          </motion.div>
+      <div
+        className="mx-auto px-6 pt-24 pb-20 sm:pt-32 w-full"
+        style={{ maxWidth: "var(--container-max)" }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 lg:gap-16 items-center">
 
-          <motion.span
-            className="absolute bottom-0 right-0 text-4xl"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: "spring",
-              stiffness: 125,
-              delay: 0.1,
-              duration: 0.7,
-            }}
-          >
-            👋
-          </motion.span>
+          {/* ── Left: text content ── */}
+          <div className="max-w-xl">
+            {/* Status pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 180, damping: 22 }}
+              className="mb-5"
+            >
+              <span className="status-pill">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+                Open to opportunities
+              </span>
+            </motion.div>
+
+            {/* Name — fold element 1 */}
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 180, damping: 22, delay: 0.08 }}
+              className="text-hero text-[var(--text-primary)] mb-4"
+            >
+              Ervin<br />Behxheti
+            </motion.h1>
+
+            {/* Headline — fold element 2 */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 180, damping: 22, delay: 0.16 }}
+              className="text-display text-[var(--text-secondary)] mb-8"
+            >
+              JavaScript Engineer building<br className="hidden sm:block" /> high-performance web products.
+            </motion.p>
+
+            {/* CTAs — fold element 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 180, damping: 22, delay: 0.24 }}
+              className="flex flex-wrap items-center gap-3 mb-12"
+            >
+              <a href="#projects" className="btn-aero">View Work</a>
+
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium px-5 py-2.5 transition-all active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                style={{
+                  background: "var(--surface-1)",
+                  color: "var(--text-primary)",
+                  border: "1px solid var(--border-strong)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.75), 0 1px 3px rgba(15,40,100,0.07)",
+                }}
+              >
+                Get in Touch
+              </a>
+
+              <a
+                href="/cv.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium px-4 py-2.5 transition-colors active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Download CV
+              </a>
+            </motion.div>
+
+            {/* Below-fold strip */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.45 }}
+              className="border-t pt-7 flex flex-col sm:flex-row sm:items-center gap-4"
+              style={{ borderColor: "var(--border)" }}
+            >
+              <p className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-tertiary)" }}>
+                <MapPin size={11} />
+                Riga, Latvia
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {heroStack.map((skill) => (
+                  <span key={skill} className="skill-pill">{skill}</span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* ── Right: animated code visual ── */}
+          <div className="hidden lg:flex justify-end items-center">
+            <HeroVisual />
+          </div>
+
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-[50rem] mx-auto mb-10 mt-4"
-      >
-        <motion.h1 className="px-0 sm:px-4 text-2xl font-medium !leading-[1.5] sm:text-4xl text-black dark:text-white ">
-          <span className="font-bold">Hello, I'm Ervin.</span>
-        </motion.h1>
-        I've been developing software for over two years, focusing primarily on
-        JavaScript and its ecosystem. During this time, I've worked on projects
-        ranging from personalized dashboards to building single-page
-        applications from scratch, including custom DOM implementations and
-        state management using vanilla JavaScript.
-      </motion.div>
-
-      <motion.div
-        className="flex flex-row items-center justify-center gap-2 px-4 text-lg font-medium"
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.1,
-        }}
-      >
-        <a
-          className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-105 active:scale-105 transition cursor-pointer borderBlack text-gray-950"
-          href="https://github.com/ErvinBehxheti"
-          target="_blank"
-        >
-          GitHub <FaGithub className="opacity-70" />
-        </a>
-
-        <a
-          className="group bg-gray-950 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-105 hover:scale-105 active:scale-105 transition border-2 border-white border-opacity-40"
-          href="https://www.linkedin.com/in/ervinbehxheti/"
-          target="_blank"
-        >
-          <span className="opacity-70">LinkedIn</span>
-          <BsLinkedin className="opacity-70" />
-        </a>
-      </motion.div>
     </section>
   );
 }

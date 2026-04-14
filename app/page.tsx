@@ -3,17 +3,17 @@ import Experience from "@/components/experience";
 import Intro from "@/components/intro";
 import Projects from "@/components/projects";
 import Skills from "@/components/skills";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center">
+    <main className="flex flex-col items-center w-full">
       <Intro />
-      <div className="flex flex-col items-center px-4">
-        <Projects />
-        <Skills />
-        <Experience />
-        <Contact />
-      </div>
+      <Projects />
+      <Skills />
+      <Experience />
+      <Contact />
+      <Footer />
     </main>
   );
 }

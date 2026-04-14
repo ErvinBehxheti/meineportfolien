@@ -1,18 +1,18 @@
 "use client";
 
 import { useTheme } from "@/context/theme-context";
-import React from "react";
-import { BsMoon, BsSun } from "react-icons/bs";
+import { Moon, Sun } from "lucide-react";
 
 export default function ThemeSwitch() {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <button
-      className="fixed bottom-5 right-5 bg-white w-[3rem] h-[3rem] bg-opacity-80 backdrop-blur-[0.5rem] border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all dark:bg-gray-950"
       onClick={toggleTheme}
+      aria-label="Toggle theme"
+      className="flex items-center justify-center w-8 h-8 rounded-full text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-2)] transition-colors"
     >
-      {theme === "light" ? <BsSun /> : <BsMoon />}
+      {theme === "light" ? <Sun size={16} /> : <Moon size={16} />}
     </button>
   );
 }

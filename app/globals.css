@@ -2,18 +2,281 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  /* Surfaces */
+  --background: #f0f4fa;
+  --surface-1: #ffffff;
+  --surface-2: #e8edf6;
+  --surface-3: #dde4f0;
+  /* Nav gets its own fully opaque glass so it's always legible */
+  --surface-nav: rgba(245, 248, 255, 0.96);
+
+  /* Borders */
+  --border: rgba(15, 40, 100, 0.09);
+  --border-strong: rgba(15, 40, 100, 0.16);
+  --border-accent: rgba(15, 131, 253, 0.3);
+
+  /* Text */
+  --text-primary: #0f1629;
+  --text-secondary: #4d5a72;
+  --text-tertiary: #8e9ab0;
+
+  /* Accent — Frutiger Aero aqua-blue */
+  --accent: #0f83fd;
+  --accent-subtle: rgba(15, 131, 253, 0.1);
+  --accent-hover: #0068d9;
+  --accent-glow: rgba(15, 131, 253, 0.25);
+  --accent-dim: rgba(15, 131, 253, 0.06);
+
+  /* Dot grid (light mode: darker dots) */
+  --dot-color: rgba(15, 40, 100, 0.055);
+
+  /* Skill tokens */
+  --container-max: 1100px;
+  --radius: 16px;
+}
+
+.dark {
+  --background: #07070f;
+  --surface-1: #0f1120;
+  --surface-2: #161929;
+  --surface-3: #1e2235;
+  --surface-nav: rgba(10, 12, 22, 0.92);
+
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(45, 150, 255, 0.25);
+
+  --text-primary: #e4eaf6;
+  --text-secondary: #7d8fa8;
+  --text-tertiary: #424f62;
+
+  --accent: #2d96ff;
+  --accent-subtle: rgba(45, 150, 255, 0.12);
+  --accent-hover: #52aeff;
+  --accent-glow: rgba(45, 150, 255, 0.2);
+  --accent-dim: rgba(45, 150, 255, 0.05);
+
+  --dot-color: rgba(255, 255, 255, 0.028);
+}
+
+/* ══════════════════════════════════════════
+   BASE
+══════════════════════════════════════════ */
 html {
-  --line-color: #e5e7eb;
+  scroll-behavior: smooth;
 }
 
-html.dark {
-  --line-color: rgba(255, 255, 255, 0.2);
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Dot-grid texture — gives light mode the same richness as dark */
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: 26px 26px;
 }
 
-.borderBlack {
-  @apply border border-black/10;
+/* Ambient aqua bloom at the top of the page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 45% at 50% -5%,
+    rgba(60, 160, 255, 0.1) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
-.vertical-timeline {
-  padding: 0 !important;
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════
+   REDUCED MOTION
+══════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   COMPONENT LAYER
+══════════════════════════════════════════ */
+@layer components {
+
+  /* ── Navigation glass (fully opaque enough to never bleed through) ── */
+  .glass-nav {
+    background: var(--surface-nav);
+    backdrop-filter: blur(28px) saturate(220%);
+    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    border: 1px solid var(--border-strong);
+    box-shadow:
+      0 4px 24px rgba(15, 40, 100, 0.1),
+      0 1px 0 rgba(255, 255, 255, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+
+  .dark .glass-nav {
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.5),
+      0 1px 0 rgba(255, 255, 255, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* ── Standard surface card ── */
+  .surface-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow:
+      0 1px 2px rgba(15, 40, 100, 0.04),
+      0 4px 16px rgba(15, 40, 100, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .dark .surface-card {
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 4px 16px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* ── Elevated card (for contact, featured) ── */
+  .surface-elevated {
+    background: var(--surface-1);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    box-shadow:
+      0 4px 12px rgba(15, 40, 100, 0.06),
+      0 16px 40px rgba(15, 40, 100, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .dark .surface-elevated {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.4),
+      0 16px 40px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* ── Glass card (hero visual etc) ── */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow:
+      0 8px 32px rgba(15, 40, 100, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .dark .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* ── Skill pills ── */
+  .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ── Status pill (pulsing availability indicator) ── */
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      150deg,
+      rgba(15, 131, 253, 0.14) 0%,
+      rgba(15, 131, 253, 0.06) 100%
+    );
+    border: 1px solid rgba(15, 131, 253, 0.28);
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    box-shadow: 0 0 14px var(--accent-glow);
+  }
+
+  /* ── Frutiger Aero primary button ── */
+  .btn-aero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      175deg,
+      color-mix(in srgb, var(--accent) 78%, white 22%) 0%,
+      var(--accent) 55%,
+      color-mix(in srgb, var(--accent) 88%, black 12%) 100%
+    );
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+      0 2px 10px var(--accent-glow),
+      0 1px 2px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.16s ease;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn-aero:hover {
+    box-shadow:
+      0 6px 20px var(--accent-glow),
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .btn-aero:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow:
+      0 1px 6px var(--accent-glow),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  /* ── Fluid hero typography ── */
+  .text-hero {
+    font-size: clamp(42px, 6.5vw, 82px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+  }
+
+  .text-display {
+    font-size: clamp(17px, 2vw, 24px);
+    font-weight: 450;
+    line-height: 1.35;
+    letter-spacing: -0.012em;
+  }
 }
