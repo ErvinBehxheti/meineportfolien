@@ -12,6 +12,7 @@ export type ProjectData = {
   title: string;
   summary: string;
   role: string;
+  meta?: string;
   focus: string;
   stack: readonly string[];
   result: string;
@@ -19,6 +20,7 @@ export type ProjectData = {
   githubLink?: string;
   urlLink?: string;
   isPrivate?: boolean;
+  visual?: "dashboard" | "school";
 };
 
 export type ExperienceItem = {

@@ -8,8 +8,8 @@ export const links = [
     hash: "#home",
   },
   {
-    name: "Projects",
-    hash: "#projects",
+    name: "Work",
+    hash: "#work",
   },
   {
     name: "Skills",
@@ -18,6 +18,10 @@ export const links = [
   {
     name: "Experience",
     hash: "#experience",
+  },
+  {
+    name: "About",
+    hash: "#about",
   },
   {
     name: "Contact",
@@ -74,17 +78,20 @@ export const projectsData: ProjectData[] = [
     title: "Analytics Dashboard",
     summary: "Internal analytics dashboard for marketing attribution tracking.",
     role: "Frontend Developer — Attributy",
+    meta: "Attributy · 2022 – 2023",
     focus: "Data visualization layer, SSR optimization, and component architecture.",
     stack: ["Next.js", "TypeScript", "Recharts", "Tailwind CSS", "SSR"],
     result:
       "~30% improvement in first paint. Real-time chart rendering with smooth filter interactions across the dashboard.",
     isPrivate: true,
+    visual: "dashboard",
   },
   {
     title: "School Management System",
     summary:
       "Full-stack management platform for a private school — enrollment, scheduling, and payments.",
     role: "Full-Stack Developer — Freelance",
+    meta: "Freelance · 2024 – 2025",
     focus:
       "End-to-end ownership from database schema to production deployment.",
     stack: [
@@ -98,11 +105,13 @@ export const projectsData: ProjectData[] = [
     result:
       "Complete enrollment and payment workflow delivered to production. Full CI on Linux VPS.",
     isPrivate: true,
+    visual: "school",
   },
   {
     title: "Neural Blogging",
     summary: "AI-powered PWA blog platform with push notifications.",
     role: "Personal Project",
+    meta: "Personal project",
     focus: "PWA setup, ChatGPT integration, Supabase backend, notification system.",
     stack: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Framer Motion"],
     result:
@@ -116,6 +125,7 @@ export const projectsData: ProjectData[] = [
     title: "PriceSeer",
     summary: "Amazon price tracking platform with automated cron-based alerts.",
     role: "Personal Project",
+    meta: "Personal project",
     focus:
       "Server Actions scraping pipeline, MongoDB storage, and scheduled notification jobs.",
     stack: ["Next.js", "TypeScript", "MongoDB", "Server Actions", "Tailwind CSS"],

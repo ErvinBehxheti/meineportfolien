@@ -3,7 +3,7 @@ import ActiveSectionContextProvider from "@/context/active-section-context";
 import ThemeContextProvider from "@/context/theme-context";
 import { Toaster } from "react-hot-toast";
 import localFont from "next/font/local";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const sfPro = localFont({
@@ -24,6 +24,7 @@ const sfPro = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ervin.vercel.app"),
   title: "Ervin Behxheti — JavaScript Engineer",
   description:
     "JavaScript Engineer building high-performance web products with Next.js, React, TypeScript, and Node.js. Based in Riga, Latvia.",
@@ -48,6 +49,15 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#06070d" },
+    { media: "(prefers-color-scheme: light)", color: "#f2f5fb" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -58,6 +68,14 @@ export default function RootLayout({
       <body
         className={`${sfPro.variable} font-sans antialiased bg-[var(--background)] text-[var(--text-primary)]`}
       >
+        {/* Atmosphere – aurora depth + film grain behind everything */}
+        <div className="aurora" aria-hidden>
+          <div className="aurora-blob" />
+          <div className="aurora-blob" />
+          <div className="aurora-blob" />
+        </div>
+        <div className="noise" aria-hidden />
+
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
             <Header />
